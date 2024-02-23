@@ -7,6 +7,9 @@ function diminuir(){
 function aumentar(){
   contador.value++
 }
+function zerar(){
+  contador.value = 0
+}
 </script>
 
 <template>
@@ -16,5 +19,17 @@ function aumentar(){
 </template>
 
 <style scoped>
-
+button{
+  font-size: 2rem;
+  padding: 1rem;
+  margin: 1rem;
+  cursor: pointer;
+  border: none;
+  background-color: white;
+  border-radius: 0.5rem;
+  transition: 1s;
+}
+button:hover{
+  background-color: blue;
+}
 </style>
