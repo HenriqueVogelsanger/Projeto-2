@@ -1,25 +1,63 @@
 <script setup>
 import { ref } from 'vue'
 const contador = ref(0)
-function diminuir(){
-  contador.value--
+function saudacao() {
+  return `Olá, ${nome}!`
 }
-function aumentar(){
-  contador.value++
+const idade = 78
+const nome = 'Corinthians';
+function inverter(texto) {
+  return texto.split('').reverse().join('')
 }
-function zerar(){
+function diminuir() {
+  if (contador.value > 0) {
+    contador.value--
+  }
+}
+function aumentar() {
+
+  contador.value++;
+
+}
+function zerar() {
   contador.value = 0
 }
 </script>
 
 <template>
- <button @click="aumentar">+</button>
- <button @click="diminuir">-</button>
- <p>O valor do contador é: {{ contador }}</p>
+  <div class="info">
+
+    <h1>Exemplo 1 - Mostrando informações na tela</h1>
+        <p>Nome: {{ nome }} </p>
+        <p>Idade: {{ idade }}  anos</p>
+        <hr />
+        <p>Para completar 50 anos faltam: {{ 50 - idade }}  anos</p>
+        <p>O nome tem {{ nome.length }}  caracteres</p>
+        <p>O nome invertido é: {{ inverter(nome).toUpperCase() }} </p>
+        <hr />
+        <p> Exemplo de saudação usando função</p>
+        <p> {{ saudacao() }}  </p>
+  </div>
+<div class="info">
+  <button @click="aumentar">+ aumentar</button>
+  <button @click="diminuir">- diminuir</button>
+  <button @click="zerar">apagar</button>
+  <p>O valor do contador é: {{ contador }}</p>
+</div>
+
+<div v-if=" contador >= 10" style="background-color: green;">asda</div>
+
+<div v-if=" contador < 10" style="background-color: red;">axczxczxzx</div>
+
+
+
+
+
+
 </template>
 
 <style scoped>
-button{
+button {
   font-size: 2rem;
   padding: 1rem;
   margin: 1rem;
@@ -29,7 +67,15 @@ button{
   border-radius: 0.5rem;
   transition: 1s;
 }
-button:hover{
+
+.info{
+  background-color: rgb(226, 32, 32);
+  padding: 20px 30px;
+  color: rgb(0, 0, 0);
+  border-radius: 10px;
+}
+
+button:hover {
   background-color: blue;
 }
 </style>
