@@ -45,9 +45,9 @@ function zerar() {
   <p>O valor do contador é: {{ contador }}</p>
 </div>
 
-<div v-if=" contador >= 10" style="background-color: green;">asda</div>
+<div class="fl" v-if=" contador >= 10" style="background-color: green;">Maior que Dez</div>
 
-<div v-if=" contador < 10" style="background-color: red;">axczxczxzx</div>
+<div class="fl" v-if=" contador < 10" style="background-color: red;">Menor que Dez</div>
 
 
 
@@ -57,6 +57,11 @@ function zerar() {
 </template>
 
 <style scoped>
+.fl{
+  padding: 20px 30px;
+  color: rgb(0, 0, 0);
+  border-radius: 10px;
+}
 button {
   font-size: 2rem;
   padding: 1rem;
