@@ -1,59 +1,43 @@
 <script setup>
 import { ref, reactive } from 'vue';
-
+import { toast } from 'vue3-toastify'
 const nome = ref('');
 
 let dados = reactive({
   nome: "",
   email: "",
   idade: 0
+
 })
 
 const ver = ref(false)
-const invalido = reactive(
- {
-  nome: '',
-  email: '',
-  idade: ''
- }
-)
-const emailValida = (email) => {
-  if (nome.length >= 3 && nome.length <= 20) {
-    
-  }
+
+
+const idadeValido = (idade) => {
+  idade >= 18 && idade <= 60 ? true : false
 }
 
-const idadeValida = (idade) => {
-  if (idade >= 18 && idade <= 60) {
-    invalido.idade = ""
-    return true
-  }
-  else {
-    invalido.idade = "Idade deve estar entre 18 e  60 anos"
-    return false
-  }
-  
-}
-const nomeValido = (nome) => nome.length >= 3 && nome.length <= 20
-const emailValido = (email) => email.includes("@")
-const formValido = () => idadeValida(dados.idade) && nomeValido(dados.nome) && emailValido(dados.email)
+// const nomeValido = (nome) => nome.length >= 3 && nome.length <= 20 ? true : false
+// const emailValido = (email) => email.includes("@")
+// const senhaValido = (senha) => senha.length > 0
+
+// const formValido = () => idadeValido(dados.idade) && nomeValido(dados.nome) && emailValido(dados.email) 
+// && senhaValido(dados.senha)
+
 
 function enviar() {
-  ver.value = formValido()
-  // invalido.value = !ver.value
-  // if ( formValido() ) {
-  //   ver.value = true
-  // }
-  // else {
-  //   alert("sda")
-  // }
+  if (dados.idade < 18 || dados.idade > 60) {
+    toast.warn("Idade Ruim", { autoClose: 1000 })
+  }
+  else if (dados.nome.length <= 3 || dados.nome.length >= 20) {
+    toast.warn("Nome Ruim", { autoClose: 1000 })
+  }
+  console.log(dados)
 }
-console.log(dados)
 
 </script>
 
 <template>
-
   <main>
     <h1>Teste</h1>
     <form @submit.prevent="enviar">
@@ -61,23 +45,28 @@ console.log(dados)
       <input type="text" v-model="dados.nome" />
       <label for="email">Email:</label>
       <input type="email" v-model="dados.email" />
-      <label for="idade">Idade:</label>      
+      <label for="idade">Idade:</label>
       <input type="number" v-model="dados.idade" />
-      <span v-if="invalido.idade" class="error">{{ invalido.idade }}</span>
-      
+      <label for="senha">Senha:</label>
+      <input type="password" v-model="dados.senha" />
+      <label for="senha">Confirmar Senha:</label>
+      <input type="password" v-model="dados.confirmarSenha" />
+
+
       <button type="submit">Enviar</button>
     </form>
     <div class="teste" v-if="ver == true">
       <h2>Respostas:</h2>
       <p>{{ dados.nome }}</p>
       <p>{{ dados.email }}</p>
-      <p>{{ dados.idade }}</p>s
+      <p>{{ dados.idade }}</p>
+      <p>{{ dados.senha }}</p>
+      <p>{{ dados.confirmarSenha }}</p>
     </div>
     <!-- <div v-if="invalido">
       <p>Algo de errado não está certo!</p>
     </div> -->
   </main>
-
 </template>
 <style scoped>
 * {
@@ -112,9 +101,10 @@ form {
   flex-direction: column;
   gap: 10px;
 }
+
 .error {
   color: red;
   font-size: 0.8rem;
-  
+
 }
 </style>
