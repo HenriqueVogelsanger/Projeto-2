@@ -40,7 +40,11 @@ const dados = reactive({
   senha: "",
   confirmarSenha: "",
  endereço: "",
- cidade:""
+ cidade:"",
+ hobbies:[],
+ estado: "",
+ linguagens:"",
+ biografia:"",
 })
 
 const ver = ref(false)
@@ -59,20 +63,59 @@ const idadeValido = (idade) => {
 
 
 function enviar() {
-  // if (dados.idade < 18 || dados.idade > 60) {
-  //   toast.warn("Idade Ruim", { autoClose: 1000 })
-  // }
-  // else if (dados.nome.length <= 3 || dados.nome.length >= 20) {
-  //   toast.warn("Nome Ruim", { autoClose: 1000 })
-  // }
-  ver.value = true
+   if (dados.idade < 18 || dados.idade > 60) {
+     toast.warn("Idade Ruim", { autoClose: 1000 })
+   }
+   else if (dados.nome.length <= 3 || dados.nome.length >= 20) {
+     toast.warn("Nome Ruim", { autoClose: 1000 })
+   }
+
+  else if(!dados.email.includes("@")){
+    toast.warn("Inclua @ no seu email", {autoClose: 1000})
+  }
+  else if(dados.dataNascimento.length <= 0){
+    toast.warn("Insira uma data válida", {autoclosa: 1000})
+  }
+  else if(dados.senha.length < 6){
+    toast.warn("Insira uma senha mais forte", {autoclose: 1000})
+  }
+  else if (dados.confirmarSenha != dados.senha){
+    toast.warn("A senha deve ser a mesma", {autoclose:1000})
+  }
+  else if (dados.confirmarSenha.length <= 0){
+    toast.warn("Confirme sua senha", {autoclose:1000})
+  }
+  else if (dados.endereço.length <= 0){
+    toast.warn("O campo de 'endereço' é obrigatório", {autoclose:1000})
+  }
+  else if (dados.cidade.length <= 0){
+    toast.warn("O campo de 'cidade' é obrigatório", {autoclose:1000})
+  }
+  else if (dados.estado.length <= 0){
+    toast.warn("Selecione um estado", {autoclose:1000})
+  }
+  else if (dados.hobbies.length <= 0){
+    toast.warn("Selecione pelo menos um hobbie", {autoclose:1000})
+  }
+  else if (dados.linguagens.length <= 0){
+    toast.warn("Não sabe programar em nenhuma linguagem?kkkk", {autoclose:1000})
+  }
+  else if (dados.biografia <= 0){
+    toast.warn("Preencha todos os campos", {autoclose:1000})
+  }
+  else{
+    ver.value = true
+    toast.success("Deu tudo certo, aproveite", {autoclose:1000})
+  }
+  
 }
 
 </script>
 
 <template>
+  <div class="fundo1">
   <main>
-    <h1>Teste</h1>
+    <h1>FORMULARIO DEV WEB</h1>
     <form @submit.prevent="enviar">
       <label for="nome">Nome:</label>
       <input type="text" v-model="dados.nome" />
@@ -92,7 +135,24 @@ function enviar() {
       <select name="" v-model="dados.estado" id="">
         <option  v-for="item in siglas" :value="item" :key="item" >{{ item }}</option>
       </select>
-
+      <label for="Hobbies">Hobbies:</label>
+      <select name="" id="" multiple v-model="dados.hobbies">
+      <option value=" esportes ">Esportes</option>
+      <option value="videogame">Videogame</option>
+      <option value="tocar instrumentos">Tocar Instrumentos</option>
+      <option value="cantar">Cantar</option>
+      <option value="dançar">Dançar</option>
+    </select>
+    <label for="Linguagens de Prog">Linguagens de Prog:</label>
+      <select name="" id="" multiple v-model="dados.linguagens">
+      <option value=" Javascript">Javascript</option>
+      <option value="Vue">Vue</option>
+      <option value="Python">Python</option>
+      <option value="PHP">PHP</option>
+      <option value="c sharp">c sharp</option>
+    </select>
+    <label for="biografia">Biografia:</label>
+      <input type="text" v-model="dados.biografia" />
       <button type="submit">Enviar</button>
     </form>
     <div class="teste" v-if="ver == true">
@@ -101,15 +161,18 @@ function enviar() {
       <p>{{ dados.email }}</p>
       <p>{{ dados.dataNascimento }}</p>
       <p>{{ dados.senha }}</p>
-      <p>{{ dados.confirmarSenha }}</p>
       <p>{{ dados.endereço }}</p>
       <p>{{ dados.cidade}}</p>
       <p>{{ dados.estado}}</p>
+      <p><span v-for="item in dados.hobbies">{{ item }}</span></p>
+      <p><span v-for="item in dados.linguagens">{{ item }}</span></p>
+      <p>{{ dados.biografia }}</p>
     </div>
     <!-- <div v-if="invalido">
       <p>Algo de errado não está certo!</p>
     </div> -->
   </main>
+</div>
 </template>
 <style scoped>
 * {
@@ -125,12 +188,14 @@ function enviar() {
 
 main {
   width: 50%;
-  margin: 20px auto;
+  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 10px;
+  backface-visibility: visible;
+  background-color: burlywood;
 }
 
 input {
@@ -149,5 +214,17 @@ form {
   color: red;
   font-size: 0.8rem;
 
+}
+
+p > span {
+  display: flex;
+  flex-direction: column
+}
+
+.fundo1{
+  background-image: url("../src/assets/maxresdefault.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  
 }
 </style>
