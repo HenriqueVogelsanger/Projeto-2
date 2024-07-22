@@ -50,16 +50,6 @@ const dados = reactive({
 const ver = ref(false)
 
 
-const idadeValido = (idade) => {
-  idade >= 18 && idade <= 60 ? true : false
-}
-
-// const nomeValido = (nome) => nome.length >= 3 && nome.length <= 20 ? true : false
-// const emailValido = (email) => email.includes("@")
-// const senhaValido = (senha) => senha.length > 0
-
-// const formValido = () => idadeValido(dados.idade) && nomeValido(dados.nome) && emailValido(dados.email) 
-// && senhaValido(dados.senha)
 
 
 function enviar() {
@@ -98,7 +88,7 @@ function enviar() {
     toast.warn("Selecione pelo menos um hobbie", {autoclose:1000})
   }
   else if (dados.linguagens.length <= 0){
-    toast.warn("Não sabe programar em nenhuma linguagem?kkkk", {autoclose:1000})
+    toast.warn("Não sabe programar em nenhuma linguagem?kkk", {autoclose:1000})
   }
   else if (dados.biografia <= 0){
     toast.warn("Preencha todos os campos", {autoclose:1000})
