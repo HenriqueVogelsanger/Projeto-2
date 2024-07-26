@@ -1,6 +1,7 @@
 <script setup>
 import { ref, reactive } from 'vue';
 import { toast } from 'vue3-toastify'
+import FormComp from './components/FormComp.vue';
 const nome = ref('');
 
 const siglas = ref([ 
@@ -168,9 +169,8 @@ function enviar() {
       <p><span v-for="item in dados.linguagens">{{ item }}</span></p>
       <p>{{ dados.biografia }}</p>
     </div>
-    <!-- <div v-if="invalido">
-      <p>Algo de errado não está certo!</p>
-    </div> -->
+
+    
   </main>
 </div>
 </template>
