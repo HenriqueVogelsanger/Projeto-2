@@ -162,8 +162,15 @@ function enviar(item) {
 }
 
 .teste {
+  width: 50%;
+  margin: auto;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  backface-visibility: visible;
+  background-color: burlywood;
 }
 
 main {
@@ -202,7 +209,7 @@ p > span {
 }
 
 .fundo1{
-  background-image: url("../src/assets/maxresdefault.jpg");
+  background-image: url("../assets/pretokk.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   
